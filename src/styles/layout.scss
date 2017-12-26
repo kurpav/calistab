@@ -1,0 +1,40 @@
+$mq-breakpoints: (
+  mobile:  320px,
+  tablet:  740px,
+  desktop: 980px,
+  wide:    1300px
+);
+
+@import "~sass-mq/mq";
+
+.foo {
+  width: 100px;
+  height: 100px;
+
+  @include mq($from: mobile, $until: tablet) {
+    background: red;
+  }
+  @include mq($from: tablet) {
+    background: green;
+  }
+}
+
+.app {
+  &__container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50px auto 50px;
+  }
+
+  &__header {
+    background: $primary;
+  }
+
+  &__content {
+    background: $text-p;
+  }
+
+  &__footer {
+    background: $secondary;
+  }
+}

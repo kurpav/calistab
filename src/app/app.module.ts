@@ -15,10 +15,20 @@ import { routes } from './routes';
 import { reducer } from './reducers';
 
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { StatusBarComponent } from './components/status-bar/status-bar.component';
+import { TabataTimerComponent } from './components/tabata-timer/tabata-timer.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { CustomTabataComponent } from './components/custom-tabata/custom-tabata.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent,
+    StatusBarComponent,
+    TabataTimerComponent,
+    SettingsComponent,
+    CustomTabataComponent
   ],
   imports: [
     BrowserModule,

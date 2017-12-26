@@ -1,8 +1,5 @@
-.example-container {
-  display: flex;
-  flex-direction: column;
-}
+@import "../styles/palette";
 
-.example-container > * {
-  width: 100%;
+.app__container {
+  background-color: $text-p;
 }

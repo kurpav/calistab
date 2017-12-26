@@ -1,19 +1,11 @@
-<mat-toolbar color="primary">
-    <mat-icon>menu</mat-icon>
-    <span>{{title}}</span>
-</mat-toolbar>
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Input">
-  </mat-form-field>
-
-  <mat-form-field>
-    <textarea matInput placeholder="Textarea"></textarea>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-select placeholder="Select">
-      <mat-option value="option">Option</mat-option>
-    </mat-select>
-  </mat-form-field>
+<div class="app__container">
+  <div class="app__header">
+    <app-status-bar></app-status-bar>
+  </div>
+  <div class="app__content">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="app__footer">
+    <app-navigation></app-navigation>
+  </div>
 </div>
