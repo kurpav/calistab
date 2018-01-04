@@ -1,0 +1,10 @@
+@import "~styles/palette";
+@import "~styles/variables";
+
+.timer {
+  font-size: 120px;
+  color: $text-p;
+  font-family: $font-open-sans;
+  text-align: center;
+  line-height: 1;
+}

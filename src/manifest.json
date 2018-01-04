@@ -3,8 +3,9 @@
   "short_name": "Calistab",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#3E4EB8",
-  "theme_color": "#2F3BA2",
+  "background_color": "#df342e",
+  "theme_color": "#fc4a19",
+  "gcm_sender_id": "223380409735",
   "icons": [
     {
       "src": "assets/icons/android-72x72.png",
@@ -29,6 +30,16 @@
     {
       "src": "assets/icons/pwa-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-384x384.png",
+      "sizes": "384x384",
       "type": "image/png"
     },
     {

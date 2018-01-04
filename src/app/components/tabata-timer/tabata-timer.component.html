@@ -1,3 +1,19 @@
-<p>
-  tabata-timer works!
-</p>
+<div class="tabata__timer__container">
+  <app-cb-swiper>
+    <div class="swiper-slide">
+      <div class="swiper__slide__content">
+          <app-round-counter [current]="9" [total]="10"></app-round-counter>
+          <app-timer></app-timer>
+          <div class="controls">
+            <button mat-raised-button color="primary">Start</button>
+            <button mat-raised-button color="accent">Reset</button>
+          </div>
+      </div>
+    </div>
+    <div class="swiper-slide">
+        <div class="swiper__slide__content">
+          <app-tabata-form></app-tabata-form>
+        </div>
+      </div>
+  </app-cb-swiper>
+</div>

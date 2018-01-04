@@ -1,0 +1,27 @@
+@import "~styles/palette";
+
+.tabata__timer__container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  app-round-counter {
+    display: block;
+    margin-top: 60px;
+  }
+
+  app-timer {
+    display: block;
+    margin-top: 60px;
+  }
+
+  .controls {
+    margin-top: 75px;
+    display: flex;
+    justify-content: center;
+
+    button + button {
+      margin-left: 50px;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import "~styles/palette";
+
+.tabata__form {
+  padding: 0 15px;
+
+  & > * {
+    width: 100%;
+  }
+
+  .total__time {
+    margin-top: 15px;
+    color: $text-p;
+    text-align: center;
+
+    .label {
+      font-size: 20px;
+    }
+
+    .time {
+      font-size: 36px;
+    }
+  }
+}

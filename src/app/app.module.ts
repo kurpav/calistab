@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { MatSelectModule, MatInputModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import { MatSelectModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
 
 import 'hammerjs';
 
@@ -20,6 +20,10 @@ import { StatusBarComponent } from './components/status-bar/status-bar.component
 import { TabataTimerComponent } from './components/tabata-timer/tabata-timer.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CustomTabataComponent } from './components/custom-tabata/custom-tabata.component';
+import { RoundCounterComponent } from './components/tabata-timer/round-counter/round-counter.component';
+import { TimerComponent } from './components/tabata-timer/timer/timer.component';
+import { SharedModule } from './components/shared/shared.module';
+import { TabataFormComponent } from './components/tabata-timer/tabata-form/tabata-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import { CustomTabataComponent } from './components/custom-tabata/custom-tabata.
     StatusBarComponent,
     TabataTimerComponent,
     SettingsComponent,
-    CustomTabataComponent
+    CustomTabataComponent,
+    RoundCounterComponent,
+    TimerComponent,
+    TabataFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,8 +73,9 @@ import { CustomTabataComponent } from './components/custom-tabata/custom-tabata.
 
     MatSelectModule,
     MatInputModule,
-    MatToolbarModule,
-    MatIconModule
+    MatButtonModule,
+    MatIconModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

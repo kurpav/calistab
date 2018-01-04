@@ -1,0 +1,10 @@
+@import "~styles/palette";
+@import "~styles/variables";
+
+.round__counter {
+  font-size: 72px;
+  color: $text-p;
+  font-family: $font-open-sans;
+  text-align: center;
+  line-height: 1;
+}

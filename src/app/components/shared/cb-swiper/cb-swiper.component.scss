@@ -1,0 +1,25 @@
+@import "~styles/palette";
+
+.swiper__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+swiper.s-wrapper>.swiper .swiper-pagination {
+  bottom: 30px;
+
+  .swiper-pagination-handle {
+    span.swiper-pagination-bullet {
+      background: $text-p;
+      border: 0;
+      opacity: 1;
+
+      &.swiper-pagination-bullet-active {
+        background: $primary;
+      }
+    }
+  }
+}
