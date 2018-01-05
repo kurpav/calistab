@@ -8,3 +8,7 @@ body {
 
   height: 100%;
 }
+
+input[type="time"] {
+  min-height: 19px; // ios safari input fix
+}
