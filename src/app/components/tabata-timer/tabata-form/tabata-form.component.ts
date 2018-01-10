@@ -4,6 +4,9 @@ import { FormGroup } from '@angular/forms/src/model';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Tabata } from '../tabata.model';
+import { Store } from '@ngrx/store';
+import { State } from '../../../reducers/index';
+import * as tabataTimer from '../../../actions/tabata-timer';
 
 const DEFAULT_TABATAS: number = 1;
 const DEFAULT_ROUNDS: number = 5;
@@ -23,7 +26,7 @@ export class TabataFormComponent implements OnInit, OnDestroy {
 
   private _tabataFormChanges: Subscription;
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder, private _store: Store<State>) {}
 
   ngOnInit() {
     this.tabataForm = this._fb.group({
@@ -42,6 +45,7 @@ export class TabataFormComponent implements OnInit, OnDestroy {
   private _updateTotalTime(tabatas: number, rounds: number, timeOn: number, timeOff: number, preparationTime: number) {
     this.totalSeconds = tabatas * (rounds * (timeOn + timeOff)) + preparationTime;
     this.totalTime = `${Math.trunc(this.totalSeconds / 60)}:${this.totalSeconds % 60}`;
+    this._store.dispatch(new tabataTimer.UpdateTotalTime(this.totalSeconds));
   }
 
   ngOnDestroy() {

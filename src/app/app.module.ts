@@ -1,20 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreModule } from '@ngrx/store';
-import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 import 'hammerjs';
 
-import { routes } from './routes';
-import { reducer } from './reducers';
+import { environment } from '../environments/environment';
+
+import { routes, CustomRouterStateSerializer } from './routes';
+import { reducers, metaReducers } from './reducers';
 
 import { AppComponent } from './app.component';
 
 import { ComponentsModule } from './components/components.module';
+import { RouterEffects } from './effects/router';
 
 @NgModule({
   declarations: [
@@ -26,19 +30,25 @@ import { ComponentsModule } from './components/components.module';
     RouterModule.forRoot(routes, { useHash: true }),
 
     /**
-     * StoreModule.provideStore is imported once in the root module, accepting a reducer
+     * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of
      * reducers, combineReducers will be run creating your application
      * meta-reducer. This returns all providers for an @ngrx/store
      * based application.
      */
-    StoreModule.provideStore(reducer),
+    StoreModule.forRoot(reducers, { metaReducers }),
 
     /**
      * @ngrx/router-store keeps router state up-to-date in the store and uses
      * the store as the single source of truth for the router's state.
      */
-    RouterStoreModule.connectRouter(),
+    StoreRouterConnectingModule.forRoot({
+      /*
+        They stateKey defines the name of the state used by the router-store reducer.
+        This matches the key defined in the map of reducers
+      */
+      stateKey: 'router',
+    }),
 
     /**
      * Store devtools instrument the store retaining past versions of state
@@ -50,13 +60,20 @@ import { ComponentsModule } from './components/components.module';
      *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
-    StoreDevtoolsModule.instrumentOnlyWithExtension({
-      maxAge: 5
-    }),
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
+
+    EffectsModule.forRoot([ RouterEffects ]),
 
     ComponentsModule
   ],
-  providers: [],
+  providers: [
+    /**
+     * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
+     * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
+     * by `@ngrx/router-store` to include only the desired pieces of the snapshot.
+     */
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

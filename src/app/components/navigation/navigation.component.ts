@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { go } from '@ngrx/router-store';
+import * as RouterActions from '../../actions/router';
 import { Router } from '@angular/router';
 import { State } from '../../reducers/index';
 
@@ -17,7 +17,7 @@ export class NavigationComponent implements OnInit {
   }
 
   changeState(route: string) {
-    this._store.dispatch(go(`/${route}`));
+    this._store.dispatch(new RouterActions.Go({ path: [`/${route}`] }));
   }
 
   isActive(url: string) {

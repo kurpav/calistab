@@ -2,7 +2,8 @@ import { State } from '../../reducers';
 import { Store } from '@ngrx/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { RouterState } from '@ngrx/router-store';
+import { RouterReducerState } from '@ngrx/router-store';
+import { RouterStateUrl } from '../../routes';
 
 @Component({
   selector: 'app-status-bar',
@@ -22,8 +23,10 @@ export class StatusBarComponent implements OnInit, OnDestroy {
   constructor(private _store: Store<State>) { }
 
   ngOnInit() {
-    this._routes$ = this._store.select('router').subscribe((state: RouterState) => {
-      this.state = this.STATES_MAP[state.path];
+    this._routes$ = this._store.select('router').subscribe((state: RouterReducerState<RouterStateUrl>) => {
+      if (state) {
+        this.state = this.STATES_MAP[state.state.url];
+      }
     });
   }
 

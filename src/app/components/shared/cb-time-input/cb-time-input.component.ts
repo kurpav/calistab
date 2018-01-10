@@ -26,7 +26,7 @@ export class CbTimeInputComponent implements OnInit, OnDestroy, MatFormFieldCont
   focused = false;
   controlType = 'app-cb-time-input';
 
-  // todo: fix it
+  // todo: add lead zero on blur
   ngControl = null;
   errorState = false;
 
