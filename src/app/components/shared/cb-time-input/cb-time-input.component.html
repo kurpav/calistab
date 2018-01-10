@@ -1,0 +1,11 @@
+<div [formGroup]="timestamp">
+  <input class="minutes" type="number"
+  formControlName="minutes" size="2"
+  (keydown)="onKeyDown($event)"
+  step="1" min="0" max="99" [disabled]="disabled">
+  <span>:</span>
+  <input class="seconds" type="number"
+  formControlName="seconds" size="2"
+  (keydown)="onKeyDown($event)"
+  step="5" min="0" max="59" [disabled]="disabled">
+</div>
