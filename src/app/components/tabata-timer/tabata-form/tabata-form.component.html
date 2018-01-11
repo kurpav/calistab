@@ -1,21 +1,24 @@
 <form class="tabata__form" [formGroup]="tabataForm">
   <mat-form-field color="accent">
-    <input matInput formControlName="tabatas" placeholder="Tabatas">
+    <input matInput type="number" step="1" formControlName="tabatas" placeholder="Tabatas">
   </mat-form-field>
   <mat-form-field color="accent">
-    <input matInput formControlName="rounds" placeholder="Rounds">
+    <app-cb-time-input formControlName="tabataTimeOff" placeholder="Tabata time off"></app-cb-time-input>
   </mat-form-field>
   <mat-form-field color="accent">
-    <app-cb-time-input formControlName="timeOn" placeholder="Time on"></app-cb-time-input>
+    <input matInput type="number" step="1" formControlName="rounds" placeholder="Rounds">
   </mat-form-field>
   <mat-form-field color="accent">
-    <app-cb-time-input formControlName="timeOff" placeholder="Time off"></app-cb-time-input>
+    <app-cb-time-input formControlName="roundTimeOn" placeholder="Round time on"></app-cb-time-input>
+  </mat-form-field>
+  <mat-form-field color="accent">
+    <app-cb-time-input formControlName="roundTimeOff" placeholder="Round time off"></app-cb-time-input>
   </mat-form-field>
   <mat-form-field color="accent">
     <app-cb-time-input formControlName="preparationTime" placeholder="Preparation time"></app-cb-time-input>
   </mat-form-field>
   <div class="total__time">
     <div class="label">Total workout time:</div>
-    <div class="time">{{totalTime}}</div>
+    <div class="time">{{totalTime$ | async}}</div>
   </div>
 </form>

@@ -12,13 +12,14 @@ import 'hammerjs';
 
 import { environment } from '../environments/environment';
 
-import { routes, CustomRouterStateSerializer } from './routes';
+import { routes } from './routes';
 import { reducers, metaReducers } from './reducers';
+import { RouterEffects } from './effects/router';
+import { CustomRouterStateSerializer } from './shared/utils';
 
 import { AppComponent } from './app.component';
 
 import { ComponentsModule } from './components/components.module';
-import { RouterEffects } from './effects/router';
 
 @NgModule({
   declarations: [

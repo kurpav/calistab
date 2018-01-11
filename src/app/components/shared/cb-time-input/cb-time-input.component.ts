@@ -69,6 +69,7 @@ export class CbTimeInputComponent implements OnInit, OnDestroy, MatFormFieldCont
   }
   set disabled(dis) {
     this._disabled = coerceBooleanProperty(dis);
+    this._disabled ? this.timestamp.disable() : this.timestamp.enable();
     this.stateChanges.next();
   }
 

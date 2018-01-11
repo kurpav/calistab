@@ -3,16 +3,20 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { Tabata } from '../tabata.model';
+import { TabataParams } from '../models/tabata';
 import { Store } from '@ngrx/store';
 import { State } from '../../../reducers/index';
-import * as tabataTimer from '../../../actions/tabata-timer';
+import { Observable } from 'rxjs/Observable';
 
-const DEFAULT_TABATAS: number = 1;
-const DEFAULT_ROUNDS: number = 5;
-const DEFAULT_TIME_ON: number = 60;
-const DEFAULT_TIME_OFF: number = 30;
-const DEFAULT_PREPARATION_TIME: number = 10;
+import * as tabataTimer from '../actions/tabata-timer';
+import * as fromTabataTimer from '../reducers';
+
+const DEFAULT_TABATAS = 1;
+const DEFAULT_TABATA_TIME_OFF = 0;
+const DEFAULT_ROUNDS = 5;
+const DEFAULT_TIME_ON = 60;
+const DEFAULT_TIME_OFF = 30;
+const DEFAULT_PREPARATION_TIME = 10;
 
 @Component({
   selector: 'app-tabata-form',
@@ -21,31 +25,35 @@ const DEFAULT_PREPARATION_TIME: number = 10;
 })
 export class TabataFormComponent implements OnInit, OnDestroy {
   tabataForm: FormGroup;
-  totalTime: string;
-  totalSeconds: number;
+  totalTime$: Observable<string>;
 
   private _tabataFormChanges: Subscription;
 
-  constructor(private _fb: FormBuilder, private _store: Store<State>) {}
+  constructor(private _fb: FormBuilder, private _store: Store<fromTabataTimer.State>) {
+    this.totalTime$ = _store.select(fromTabataTimer.getTotalTime);
+  }
 
   ngOnInit() {
     this.tabataForm = this._fb.group({
-      tabatas: [DEFAULT_TABATAS, Validators.required ],
-      rounds: [DEFAULT_ROUNDS, Validators.required ],
-      timeOn: [DEFAULT_TIME_ON, Validators.required ],
-      timeOff: [DEFAULT_TIME_OFF, Validators.required ],
-      preparationTime: [DEFAULT_PREPARATION_TIME, Validators.required ],
+      tabatas: [DEFAULT_TABATAS, Validators.required],
+      tabataTimeOff: [DEFAULT_TABATA_TIME_OFF, Validators.required],
+      rounds: [DEFAULT_ROUNDS, Validators.required],
+      roundTimeOn: [DEFAULT_TIME_ON, Validators.required],
+      roundTimeOff: [DEFAULT_TIME_OFF, Validators.required],
+      preparationTime: [DEFAULT_PREPARATION_TIME, Validators.required],
     });
-    this._tabataFormChanges = this.tabataForm.valueChanges.subscribe((value: Tabata) => {
-      this._updateTotalTime(value.tabatas, value.rounds, value.timeOn, value.timeOff, value.preparationTime);
+    this._tabataFormChanges = this.tabataForm.valueChanges.subscribe((value: TabataParams) => {
+      this._store.dispatch(new tabataTimer.UpdateTabataParams(value));
     });
-    this._updateTotalTime(DEFAULT_TABATAS, DEFAULT_ROUNDS, DEFAULT_TIME_ON, DEFAULT_TIME_OFF, DEFAULT_PREPARATION_TIME);
-  }
 
-  private _updateTotalTime(tabatas: number, rounds: number, timeOn: number, timeOff: number, preparationTime: number) {
-    this.totalSeconds = tabatas * (rounds * (timeOn + timeOff)) + preparationTime;
-    this.totalTime = `${Math.trunc(this.totalSeconds / 60)}:${this.totalSeconds % 60}`;
-    this._store.dispatch(new tabataTimer.UpdateTotalTime(this.totalSeconds));
+    this._store.dispatch(new tabataTimer.UpdateTabataParams({
+      tabatas: DEFAULT_TABATAS,
+      tabataTimeOff: DEFAULT_TABATA_TIME_OFF,
+      rounds: DEFAULT_ROUNDS,
+        roundTimeOn: DEFAULT_TIME_ON,
+        roundTimeOff: DEFAULT_TIME_OFF,
+        preparationTime: DEFAULT_PREPARATION_TIME
+      }));
   }
 
   ngOnDestroy() {

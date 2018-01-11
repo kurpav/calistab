@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { RouterReducerState } from '@ngrx/router-store';
-import { RouterStateUrl } from '../../routes';
+import { RouterStateUrl } from '../../shared/utils';
 
 @Component({
   selector: 'app-status-bar',
