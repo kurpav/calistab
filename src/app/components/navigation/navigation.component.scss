@@ -3,14 +3,12 @@
 .nav {
   &__container {
     height: 100%;
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
+    display: flex;
     font-size: 14px;
     text-align: center;
   }
   &__item {
+    flex: 1;
     display: flex;
     justify-content: center;
     flex-flow: column;
