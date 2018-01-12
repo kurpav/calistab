@@ -1,13 +1,13 @@
 <div class="nav__container">
-  <a class="nav__item" [class.nav__item_active]="isActive('tabata')" (click)="changeState('tabata')">
+  <a mat-button class="nav__item" [class.nav__item_active]="isActive('tabata')" (click)="changeState('tabata')">
     <mat-icon>timer</mat-icon>
     <div>Tabata</div>
   </a>
-  <a class="nav__item" [class.nav__item_active]="isActive('custom')" (click)="changeState('custom')">
+  <a mat-button class="nav__item" [class.nav__item_active]="isActive('custom')" (click)="changeState('custom')">
     <mat-icon>flash_on</mat-icon>
     <div>Custom</div>
   </a>
-  <a class="nav__item" [class.nav__item_active]="isActive('settings')" (click)="changeState('settings')">
+  <a mat-button class="nav__item" [class.nav__item_active]="isActive('settings')" (click)="changeState('settings')">
     <mat-icon>settings</mat-icon>
     <div>Settings</div>
   </a>

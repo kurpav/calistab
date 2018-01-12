@@ -6,8 +6,3 @@ export interface TabataParams {
   roundTimeOff: number;
   preparationTime: number;
 }
-
-export interface Tabata {
-  totalTime: number;
-  totalRounds: number;
-}

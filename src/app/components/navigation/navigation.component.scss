@@ -12,13 +12,23 @@
   }
   &__item {
     display: flex;
-    align-items: center;
+    justify-content: center;
     flex-flow: column;
     text-decoration: none;
     color: $white;
+    line-height: 1;
+    height: 100%;
 
     &_active, &:hover, &:focus {
       color: $black;
+    }
+
+    & /deep/ .mat-button-wrapper {
+      display: block;
+    }
+
+    & /deep/ .mat-button-focus-overlay {
+      display: none;
     }
   }
 }
