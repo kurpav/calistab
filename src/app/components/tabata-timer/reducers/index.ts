@@ -38,6 +38,11 @@ export const getTabataTimerState = createFeatureSelector<TabataTimerState>('taba
 export const getTabataTimerEntitiesState = createSelector(getTabataTimerState, state => state.tabataTimer);
 
 export const getTotalTime = createSelector(getTabataTimerEntitiesState, state => state.totalTime);
+export const getIsStarted = createSelector(getTabataTimerEntitiesState, state => state.isStarted);
+export const getCurrentTime = createSelector(getTabataTimerEntitiesState, state => state.currentTime);
+export const getCurrentRound = createSelector(getTabataTimerEntitiesState, state => state.currentRound);
+export const getTotalRounds = createSelector(getTabataTimerEntitiesState, state => state.totalRounds);
+export const getSegmentSecondsLeft = createSelector(getTabataTimerEntitiesState, state => state.segmentSecondsLeft);
 // /**
 //  * Every reducer module exports selector functions, however child reducers
 //  * have no knowledge of the overall state tree. To make them usable, we

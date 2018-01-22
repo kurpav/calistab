@@ -33,3 +33,7 @@ export class CustomRouterStateSerializer
     return { url, params, queryParams };
   }
 }
+
+export function timeToString(n: number) {
+  return ('0' + n).slice(-2);
+}

@@ -1,19 +1,20 @@
 <div class="tabata__timer__container">
-  <app-cb-swiper>
+  <app-cb-swiper [disabled]="isStarted$ | async">
     <div class="swiper-slide">
       <div class="swiper__slide__content">
-          <app-round-counter [current]="9" [total]="10"></app-round-counter>
-          <app-timer></app-timer>
-          <div class="controls">
-            <button mat-raised-button color="primary">Start</button>
-            <button mat-raised-button color="accent">Reset</button>
-          </div>
+        <app-round-counter [current]="currentRound$ | async" [total]="totalRounds$ | async"></app-round-counter>
+        <app-timer [time]="currentTime$ | async"></app-timer>
+        <div class="controls">
+          <button [hidden]="isStarted$ | async" mat-raised-button color="primary" (click)="start()">Start</button>
+          <button [hidden]="!(isStarted$ | async)" mat-raised-button color="warn" (click)="pause()">Pause</button>
+          <button class="reset__btn" mat-raised-button color="accent" (click)="reset()">Reset</button>
+        </div>
       </div>
     </div>
     <div class="swiper-slide">
-        <div class="swiper__slide__content">
-          <app-tabata-form></app-tabata-form>
-        </div>
+      <div class="swiper__slide__content">
+        <app-tabata-form></app-tabata-form>
       </div>
+    </div>
   </app-cb-swiper>
 </div>

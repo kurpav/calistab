@@ -5,6 +5,7 @@ import { MatFormFieldControl } from '@angular/material';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs/Subscription';
+import { timeToString } from '../../../shared/utils';
 
 const TIME_INPUT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -159,13 +160,9 @@ export class CbTimeInputComponent implements OnInit, OnDestroy, MatFormFieldCont
 
   private _updateTime(seconds: number = 0) {
     this.timestamp.setValue({
-      minutes: this._toTimeString(Math.trunc(seconds / 60)),
-      seconds: this._toTimeString(seconds % 60)
+      minutes: timeToString(Math.trunc(seconds / 60)),
+      seconds: timeToString(seconds % 60)
     });
-  }
-
-  private _toTimeString(n: number) {
-    return ('0' + n).slice(-2);
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, EventEmitter, Output, Input } from '@angular/core';
 
 import { SwiperComponent, SwiperDirective, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
@@ -9,6 +9,9 @@ import { SwiperComponent, SwiperDirective, SwiperConfigInterface } from 'ngx-swi
   encapsulation: ViewEncapsulation.None
 })
 export class CbSwiperComponent implements OnInit {
+  @Input() disabled: boolean;
+  @Output() indexChange = new EventEmitter<any>();
+
   public config: SwiperConfigInterface = {
     scrollbar: null,
     direction: 'horizontal',
@@ -29,4 +32,7 @@ export class CbSwiperComponent implements OnInit {
   ngOnInit() {
   }
 
+  onIndexChange(index: number) {
+    this.indexChange.emit(index);
+  }
 }
