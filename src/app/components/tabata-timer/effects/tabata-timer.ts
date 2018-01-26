@@ -13,6 +13,7 @@ import { TabataTimerService } from '../services/tabata-timer.service';
 import { Observable } from 'rxjs/Observable';
 import { TabataTimerState } from '../reducers';
 import { Status } from '../enums/status';
+import { soundManager, Sound } from '../../../shared/sound-manager';
 
 @Injectable()
 export class TabataTimerEffects {
@@ -33,6 +34,7 @@ export class TabataTimerEffects {
   .withLatestFrom(this._store)
   .do(([action, state]) => {
     const tts: State = state.tabataTimer.tabataTimer;
+    soundManager.play(Sound.BELL);
     this._tatataTimerService.start(tts.params.roundTimeOn, new tabataTimer.FinishRound());
   });
 
@@ -45,10 +47,13 @@ export class TabataTimerEffects {
     const isTabataFinished = (tts.currentRound !== tts.totalRounds) && (tts.currentRound % tts.params.rounds) === 0;
 
     if (isTimerFinished) {
+      soundManager.play(Sound.END);
       this._store.dispatch(new tabataTimer.FinishTimer());
     } else if (isTabataFinished) {
+      soundManager.play(Sound.END_TABATA);
       this._tatataTimerService.start(tts.params.tabataTimeOff, new tabataTimer.FinishRest());
     } else {
+      soundManager.play(Sound.END_ROUND);
       this._tatataTimerService.start(tts.params.roundTimeOff, new tabataTimer.FinishRest());
     }
   });
@@ -58,6 +63,7 @@ export class TabataTimerEffects {
   .withLatestFrom(this._store)
   .do(([action, state]) => {
     const tts: State = state.tabataTimer.tabataTimer;
+    soundManager.play(Sound.BELL);
     this._tatataTimerService.start(tts.params.roundTimeOn, new tabataTimer.FinishRound());
   });
 
