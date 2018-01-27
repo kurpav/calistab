@@ -50,6 +50,8 @@ export class TabataTimerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._segmentSecondsLeft.unsubscribe();
+    if (this._segmentSecondsLeft) {
+      this._segmentSecondsLeft.unsubscribe();
+    }
   }
 }

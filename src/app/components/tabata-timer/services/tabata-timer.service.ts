@@ -50,7 +50,9 @@ export class TabataTimerService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this._timer.unsubscribe();
+    if (this._timer) {
+      this._timer.unsubscribe();
+    }
   }
 
 }
