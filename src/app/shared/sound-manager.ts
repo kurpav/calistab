@@ -19,7 +19,7 @@ class SoundManager {
   init() {
     this._isReady = false;
     this._sound = new Howl({
-      src: [environment.soundsPath],
+      src: environment.soundsPath,
       sprite
     });
     this._sound.once('load', () => this._isReady = true);

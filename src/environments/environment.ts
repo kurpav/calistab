@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  soundsPath: '../../assets/sounds/default.ogg'
+  soundsPath: ['../../assets/sounds/default.ogg', '../../assets/sounds/default.mp3']
 };
