@@ -20,6 +20,7 @@ import { CustomRouterStateSerializer } from './shared/utils';
 import { AppComponent } from './app.component';
 
 import { ComponentsModule } from './components/components.module';
+import { SoundService } from './shared/sound.service';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ComponentsModule } from './components/components.module';
     ComponentsModule
   ],
   providers: [
+    SoundService,
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
      * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided

@@ -1,22 +1,21 @@
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Howl, Howler } from 'howler';
+
+import * as fromSettings from '../components/settings/reducers';
 
 import * as sprite from './sprite.json';
 import { environment } from '../../environments/environment';
 
-class SoundManager {
+@Injectable()
+export class SoundService {
   static instance;
   private _sound: any;
   private _isReady: boolean;
 
-  constructor() {
-    if (!SoundManager.instance) {
-      SoundManager.instance = this;
-    }
-
-    return SoundManager.instance;
-  }
-
-  init() {
+  constructor(
+    private _store: Store<fromSettings.SettingsState>
+  ) {
     this._isReady = false;
     this._sound = new Howl({
       src: environment.soundsPath,
@@ -28,12 +27,11 @@ class SoundManager {
   play(sound: Sound) {
     this._sound.play(sound);
   }
+
+  toggleSounds(value: boolean) {
+    Howler.mute(!value);
+  }
 }
-
-const instance = new SoundManager();
-// Object.freeze(instance);
-
-export const soundManager = instance;
 
 export enum Sound {
   THREE = 'three',

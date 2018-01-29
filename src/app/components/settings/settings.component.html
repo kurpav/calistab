@@ -1,3 +1,7 @@
-<p>
-  settings works!
-</p>
+<form [formGroup]="settingsForm">
+  <mat-card class="cb--flex">
+    <div>Sounds</div>
+    <div class="cb--flex--space"></div>
+    <mat-slide-toggle formControlName="sounds"></mat-slide-toggle>
+  </mat-card>
+</form>

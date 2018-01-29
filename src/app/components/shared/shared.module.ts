@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { MatSelectModule, MatInputModule, MatButtonModule, MatIconModule, MatCardModule, MatSlideToggleModule } from '@angular/material';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
@@ -28,6 +28,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
+    MatSlideToggleModule,
     CbSwiperComponent,
     CbTimeInputComponent
   ],

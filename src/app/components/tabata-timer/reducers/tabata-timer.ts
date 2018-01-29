@@ -52,6 +52,7 @@ export function reducer(
       return { ...state, isStarted: true, currentTime: 0, currentRound: 1, status: Status.PREPARATION };
 
     case TabataTimerActionTypes.FinishPreparation:
+    case TabataTimerActionTypes.FinishRest:
       return { ...state, status: Status.ROUND };
 
     case TabataTimerActionTypes.FinishRound:

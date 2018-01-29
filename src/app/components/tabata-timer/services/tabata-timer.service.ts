@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromTabataTimer from '../reducers';
@@ -6,18 +6,17 @@ import * as tabataTimer from '../actions/tabata-timer';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { soundManager, Sound } from '../../../shared/sound-manager';
-// import { of } from 'rxjs/observable/of';
-// import { _throw } from 'rxjs/observable/throw';
-// import { Observable } from 'rxjs/Observable';
+import { Sound, SoundService } from '../../../shared/sound.service';
 
 @Injectable()
 export class TabataTimerService implements OnDestroy {
   private _secondsLeft: number;
   private _timer: Subscription;
 
-  constructor(private _store: Store<fromTabataTimer.TabataTimerState>) {}
+  constructor(
+    private _store: Store<fromTabataTimer.TabataTimerState>,
+    private _soundService: SoundService,
+  ) {}
 
   start(seconds: number, action: any) {
       this._timer = Observable.timer(1000, 1000)
@@ -25,11 +24,11 @@ export class TabataTimerService implements OnDestroy {
         .subscribe((x) => {
           this._secondsLeft = seconds - (x + 1);
           if (this._secondsLeft === 3) {
-            soundManager.play(Sound.THREE);
+            this._soundService.play(Sound.THREE);
           } else if (this._secondsLeft === 2) {
-            soundManager.play(Sound.TWO);
+            this._soundService.play(Sound.TWO);
           } else if (this._secondsLeft === 1) {
-            soundManager.play(Sound.ONE);
+            this._soundService.play(Sound.ONE);
           }
           this._store.dispatch(new tabataTimer.IncrementSeconds());
         },

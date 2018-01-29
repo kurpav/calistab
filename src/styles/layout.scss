@@ -38,3 +38,13 @@ $mq-breakpoints: (
     background: $secondary;
   }
 }
+
+.cb--flex {
+  display: flex !important;
+
+  &--space {
+    flex: 1;
+  }
+}
+
+
