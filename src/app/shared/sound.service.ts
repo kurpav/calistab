@@ -1,25 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Howl, Howler } from 'howler';
+import { Howl, Howler } from '../shared/libs.provider';
 
 import * as fromSettings from '../components/settings/reducers';
 
-import * as sprite from './sprite.json';
+import { sprite } from './sprite';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SoundService {
-  static instance;
-  private _sound: any;
+  private _sound: Howl;
   private _isReady: boolean;
 
   constructor(
-    private _store: Store<fromSettings.SettingsState>
+    private _store: Store<fromSettings.SettingsState>,
+    @Inject(Howl) private _howl: HowlStatic,
+    @Inject(Howler) private _howler: HowlerGlobal,
   ) {
     this._isReady = false;
-    this._sound = new Howl({
+    this._sound = new this._howl({
       src: environment.soundsPath,
-      sprite
+      sprite,
     });
     this._sound.once('load', () => this._isReady = true);
   }
@@ -29,7 +30,7 @@ export class SoundService {
   }
 
   toggleSounds(value: boolean) {
-    Howler.mute(!value);
+    this._howler.mute(!value);
   }
 }
 

@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 
 import { ComponentsModule } from './components/components.module';
 import { SoundService } from './shared/sound.service';
+import { HowlProvider, HowlerProvider } from './shared/libs.provider';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,8 @@ import { SoundService } from './shared/sound.service';
     ComponentsModule
   ],
   providers: [
+    HowlProvider,
+    HowlerProvider,
     SoundService,
     /**
      * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
